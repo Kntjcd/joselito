@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMAGE GENERATING API</title>
+    <link rel="manifest" href="manifest.json">
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: bisque;
+            text-align: center;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: aqua;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #displayIMG img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: #3e8e41;
+        }
+
+        .refresh-btn {
+            background-color: #f44336;
+        }
+
+        .refresh-btn:hover {
+            background-color: #e53935;
+        }
+
+        .refresh-btn:active {
+            background-color: #c62828;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>IMAGE GENERATING API</h1>
+        <div id="displayIMG">
+            <img src="" alt="random dog images" id="imgs">
+        </div>
+        <div class="btn-container">
+            <button onclick="generateDogImage()">Generate Random Dog Image</button>
+            <button class="refresh-btn" onclick="reloadPage()">Refresh</button>
+        </div>
+    </div>
+
+    <script>
+        // Using Function to fetch a random dog image
+        function generateDogImage() {
+            fetch("https://dog.ceo/api/breeds/image/random", { method: "GET" })
+                .then(x => x.json())
+                .then(y => displayImg(y));
+        }
+
+        //So this is the Function to display the image on the page
+        function displayImg(y) {
+            const image = document.getElementById("imgs");
+            image.src = `${y.message}`;
+        }
+
+        //And this code provided is the Function to reload the page and Calling the refresh btn/ReloadPage on Body 
+        function reloadPage() {
+            location.reload();
+        }
+
+        // It Automatically load a dog image when the page loads
+        window.onload = generateDogImage;
+    </script>
+    <script src="sw.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+    "name": "random dog images",
+    "short_name": "random dog images",
+    "icons": [
+        {
+            "src": "icon2.png",
+            "sizes": "225x225",
+            "type": "image/png"
+          }
+        
+        ],
+        "start_url": "/index.html",
+        "display": "standalone",
+        "background_color": "#ddd",
+        "theme_color": "#333"
+      }
